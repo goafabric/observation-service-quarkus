@@ -1,0 +1,10 @@
+PatientID,PatientName,DateOfBirth,Gender,TestCode,TestName,Result,Unit,ReferenceRange,CollectionDate,LabName
+2,Marge Simpson,1972-03-19,F,GLU,Glucose,5.0,mmol/L,3.9-5.5,2025-12-01,Springfield Lab
+2,Marge Simpson,1972-03-19,F,HbA1c,Hemoglobin A1c,5.2,%,4.0-5.6,2025-12-01,Springfield Lab
+2,Marge Simpson,1972-03-19,F,CHOL,Total Cholesterol,4.65,mmol/L,3.23-5.17,2025-12-01,Springfield Lab
+2,Marge Simpson,1972-03-19,F,HDL,HDL Cholesterol,1.42,mmol/L,1.03-1.55,2025-12-01,Springfield Lab
+2,Marge Simpson,1972-03-19,F,LDL,LDL Cholesterol,2.59,mmol/L,0-3.34,2025-12-01,Springfield Lab
+2,Marge Simpson,1972-03-19,F,TG,Triglycerides,2.3,mmol/L,0-1.69,2025-12-01,Springfield Lab
+2,Marge Simpson,1972-03-19,F,AST,AST (SGOT),78,U/L,10-40,2025-12-01,Springfield Lab
+2,Marge Simpson,1972-03-19,F,ALT,ALT (SGPT),62,U/L,7-56,2025-12-01,Springfield Lab
+2,Marge Simpson,1972-03-19,F,TSH,Thyroid Stimulating Hormone,1.8,uIU/mL,0.5-4.5,2025-12-01,Springfield Lab

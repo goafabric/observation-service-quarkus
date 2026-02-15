@@ -1,0 +1,10 @@
+PatientID,PatientName,DateOfBirth,Gender,TestCode,TestName,Result,Unit,ReferenceRange,CollectionDate,LabName
+1,Homer Simpson,1956-05-12,M,GLU,Glucose,20.2,mmol/L,3.9-5.5,2025-12-01,Springfield Lab
+1,Homer Simpson,1956-05-12,M,HbA1c,Hemoglobin A1c,5.5,%,4.0-5.6,2025-12-01,Springfield Lab
+1,Homer Simpson,1956-05-12,M,CHOL,Total Cholesterol,6.1,mmol/L,3.2-5.2,2025-12-01,Springfield Lab
+1,Homer Simpson,1956-05-12,M,HDL,HDL Cholesterol,0.9,mmol/L,1.0-1.6,2025-12-01,Springfield Lab
+1,Homer Simpson,1956-05-12,M,LDL,LDL Cholesterol,15.0,mmol/L,0-3.4,2025-12-01,Springfield Lab
+1,Homer Simpson,1956-05-12,M,TG,Triglycerides,2.4,mmol/L,0-1.7,2025-12-01,Springfield Lab
+1,Homer Simpson,1956-05-12,M,AST,AST (SGOT),35,U/L,10-40,2025-12-01,Springfield Lab
+1,Homer Simpson,1956-05-12,M,ALT,ALT (SGPT),48,U/L,7-56,2025-12-01,Springfield Lab
+1,Homer Simpson,1956-05-12,M,TSH,Thyroid Stimulating Hormone,2.9,uIU/mL,0.5-4.5,2025-12-01,Springfield Lab
