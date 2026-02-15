@@ -10,7 +10,6 @@ import org.goafabric.observationservice.vitalsign.persistence.entity.VitalSignEo
 
 @Path("/vital-sign")
 @Produces(MediaType.APPLICATION_JSON)
-
 class VitalSignController(
     val vitalSignLogic: VitalSignLogic) {
 
