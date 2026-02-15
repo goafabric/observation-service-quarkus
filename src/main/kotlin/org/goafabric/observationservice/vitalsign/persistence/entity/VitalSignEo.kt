@@ -1,13 +1,6 @@
 package org.goafabric.observationservice.vitalsign.persistence.entity
 
-import com.fasterxml.jackson.annotation.JsonRawValue
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import jakarta.persistence.Table
-import jakarta.persistence.Version
+import jakarta.persistence.*
 import java.time.LocalDateTime
 
 @Table(name = "vital_sign")
@@ -18,14 +11,13 @@ class VitalSignEo (
     val id: String? = null,
 
     @Version //optimistic locking
-    val version: Long? = null,
+    var version: Long?= null,
 
-    val patientId: String,
+    var patientId: String,
 
-    val type: VitalSignType,
-    val createdAt: LocalDateTime,
+    var effectiveDateTime: LocalDateTime,
 
-    @Column(length = 4096)
-    @JsonRawValue
-    val content: String
+    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
+    @JoinColumn(name = "vital_sign_id")
+    var vitalSignDetails: List<VitalSignDetailsEo> = mutableListOf()
 )

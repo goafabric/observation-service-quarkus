@@ -7,5 +7,6 @@ interface Observation {
     val id: String?
     val code: Coding
     val subject: String
+    val valueQuantity: ValueQuantity?
     val effectiveDateTime: LocalDateTime
 }

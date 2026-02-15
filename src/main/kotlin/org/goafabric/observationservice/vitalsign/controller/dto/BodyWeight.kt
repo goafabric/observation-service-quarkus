@@ -7,6 +7,6 @@ data class BodyWeight(
     override val id: String? = UUID.randomUUID().toString(),
     override val code: Coding = Coding("http://loinc.org", "29463-7", "Body Weight"),
     override val subject: String,
-    val valueQuantity: ValueQuantityKg,
-    override val effectiveDateTime: LocalDateTime = LocalDateTime.now()
+    override val effectiveDateTime: LocalDateTime = LocalDateTime.now(),
+    override val valueQuantity: ValueQuantityKg,
 ) : Observation
