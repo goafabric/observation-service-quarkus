@@ -17,7 +17,7 @@ class VitalSignEo (
 
     var effectiveDateTime: LocalDateTime,
 
-    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
+    @OneToMany(cascade = [CascadeType.ALL])
     @JoinColumn(name = "vital_sign_id")
     var vitalSignDetails: List<VitalSignDetailsEo> = mutableListOf()
 )

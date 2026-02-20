@@ -8,6 +8,7 @@ import org.goafabric.observationservice.laboratory.persistence.entity.Laboratory
 import java.time.LocalDateTime
 
 @ApplicationScoped
+//@Transactional
 class LaboratoryDataLogic(
     val laboratoryDataRepository: LaboratoryDataRepository,
     ) {

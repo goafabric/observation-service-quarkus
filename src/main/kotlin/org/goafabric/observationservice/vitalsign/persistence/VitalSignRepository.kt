@@ -1,14 +1,19 @@
 package org.goafabric.observationservice.vitalsign.persistence
 
-import jakarta.data.repository.CrudRepository
+import io.quarkus.hibernate.panache.PanacheRepository
 import jakarta.data.repository.Find
 import jakarta.data.repository.Repository
 import org.goafabric.observationservice.vitalsign.persistence.entity.VitalSignEo
 
 @Repository
-interface VitalSignRepository : CrudRepository<VitalSignEo, String> {
+interface VitalSignRepository : PanacheRepository.Managed<VitalSignEo, String> {
 
     @Find
     fun findByPatientId(patientId: String) : List<VitalSignEo>
+
+    fun save(vitalSignEo: VitalSignEo): VitalSignEo {
+        persist(vitalSignEo)
+        return vitalSignEo
+    }
 
 }

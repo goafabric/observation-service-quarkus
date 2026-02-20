@@ -17,7 +17,7 @@ class LaboratoryDataEo (
 
     var effectiveDateTime: LocalDateTime,
 
-    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
+    @OneToMany(cascade = [CascadeType.ALL])
     @JoinColumn(name = "lab_id")
     var laboratoryDataDetailsEo: List<LaboratoryDataDetailsEo> = mutableListOf()
 )
