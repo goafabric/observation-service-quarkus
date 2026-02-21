@@ -1,6 +1,7 @@
 package org.goafabric.observationservice.vitalsign.logic
 
 import jakarta.enterprise.context.ApplicationScoped
+import jakarta.transaction.Transactional
 import org.goafabric.observationservice.vitalsign.controller.dto.BloodPressure
 import org.goafabric.observationservice.vitalsign.controller.dto.BodyHeight
 import org.goafabric.observationservice.vitalsign.controller.dto.BodyWeight
@@ -14,7 +15,7 @@ import org.slf4j.LoggerFactory
 import java.time.LocalDateTime
 
 @ApplicationScoped
-//@Transactional
+@Transactional
 class VitalSignLogic(
     val vitalSignRepository: VitalSignRepository) {
     private val log: Logger = LoggerFactory.getLogger(this.javaClass.name)
@@ -51,12 +52,15 @@ class VitalSignLogic(
         ))
     }
 
-    fun getObservations() : Iterable<VitalSignEo> {
+    fun getObservations() : List<VitalSignEo> {
         return vitalSignRepository.findAll().list() //.toList()
     }
 
-    fun getByPatientId(patientId: String) : Iterable<VitalSignEo> {
-        return vitalSignRepository.findByPatientId(patientId)
+    //uses workaround for lazy without mapping
+    fun getByPatientId(patientId: String) : List<VitalSignEo> {
+        val vitalSigns = vitalSignRepository.findByPatientId(patientId)
+        vitalSigns.forEach { vitalSignEo -> vitalSignEo.vitalSignDetails.size }
+        return vitalSigns;
     }
 
     private fun getPatientId(subject: String): String {
