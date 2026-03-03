@@ -47,8 +47,9 @@ class DemoDataImporter(
             BloodPressure(
                 subject = "Patient/${homer.id}",
                 effectiveDateTime = LocalDateTime.now(),
-                systolic = 140,
-                diastolic = 80
+                valueQuantity = ValueQuantityMmHg(value = 140),
+                //systolic = 140,
+                //diastolic = 80
             )
         )
 
@@ -68,8 +69,9 @@ class DemoDataImporter(
             BloodPressure(
                 subject = "Patient/${marge.id}",
                 effectiveDateTime = LocalDateTime.now(),
-                systolic = 90,
-                diastolic = 70
+                valueQuantity = ValueQuantityMmHg(value = 90),
+                //systolic = 90,
+                //diastolic = 70
             )
         )
 
@@ -87,7 +89,9 @@ class DemoDataImporter(
         )
         vitalSignLogic.save(
             BloodPressure(
-                subject = "Patient/${bart.id}", effectiveDateTime = LocalDateTime.now(), systolic = 100, diastolic = 60
+                subject = "Patient/${bart.id}", effectiveDateTime = LocalDateTime.now(),
+                valueQuantity = ValueQuantityMmHg(value = 100),
+                //systolic = 100, diastolic = 60
             )
         )
     }
@@ -102,7 +106,9 @@ class DemoDataImporter(
         )
         vitalSignLogic.save(
             BloodPressure(
-                subject = "Patient/${lisa.id}", effectiveDateTime = LocalDateTime.now(), systolic = 101, diastolic = 61
+                subject = "Patient/${lisa.id}", effectiveDateTime = LocalDateTime.now(),
+                valueQuantity = ValueQuantityMmHg(value = 101),
+                //systolic = 101, diastolic = 61
             )
         )
     }

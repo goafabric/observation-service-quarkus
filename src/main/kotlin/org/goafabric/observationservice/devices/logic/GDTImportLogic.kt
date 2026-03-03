@@ -2,6 +2,7 @@ package org.goafabric.observationservice.devices.logic
 
 import jakarta.enterprise.context.ApplicationScoped
 import org.goafabric.observationservice.vitalsign.controller.dto.BloodPressure
+import org.goafabric.observationservice.vitalsign.controller.dto.ValueQuantityMmHg
 import org.goafabric.observationservice.vitalsign.logic.VitalSignLogic
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -47,8 +48,8 @@ class GDTImportLogic(val vitalSignLogic: VitalSignLogic) {
                         observations.add(
                             BloodPressure(
                                 subject = "Patient/${patientId}",
-                                systolic = systolic,
-                                diastolic = diastolic,
+                                valueQuantity = ValueQuantityMmHg(value = systolic),
+                                //todo: diastolic
                                 effectiveDateTime = LocalDateTime.parse(
                                     "$currentDate $currentTime",
                                     DateTimeFormatter.ofPattern("yyyyMMdd HHmm[ss]")
