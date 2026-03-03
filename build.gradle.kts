@@ -87,7 +87,7 @@ dependencies {
 	testImplementation("org.assertj:assertj-core")
 	testImplementation("com.tngtech.archunit:archunit-junit5")
 
-	val langchain4JVersion = "1.7.1"
+	val langchain4JVersion = "1.11.0"
 
 	//llm
 	implementation("dev.langchain4j:langchain4j:${langchain4JVersion}")
