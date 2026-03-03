@@ -36,7 +36,7 @@ class LanguageModelConfiguration {
         return AiServices.builder<ObservationAgent?>(ObservationAgent::class.java)
             .chatModel(chatLanguageModel)
             .chatMemory(MessageWindowChatMemory.withMaxMessages(20))
-            .tools(observationAdapter)
+            .tools(io.quarkus.arc.ClientProxy.unwrap(observationAdapter))
             .build()
     }
 }
