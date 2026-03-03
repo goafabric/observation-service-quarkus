@@ -1,0 +1,2 @@
+- multiple ValueQuantity e.g. for Bloodpressure, Systolic, Diastolic
+- Mapstruct for mapping
