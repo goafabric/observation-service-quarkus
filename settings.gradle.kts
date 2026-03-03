@@ -4,4 +4,4 @@ pluginManagement {
 		gradlePluginPortal()
 	}
 }
-rootProject.name = "person-service-quarkus"
+rootProject.name = "observation-service-quarkus"
