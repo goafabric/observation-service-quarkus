@@ -12,7 +12,7 @@ import java.time.Duration
 @ApplicationScoped
 class LanguageModelConfiguration {
 
-    @Produces
+    //@Produces
     //@Profile("ollama")
     fun chatModelOllama(): ChatModel {
         return OllamaChatModel.builder()
@@ -23,6 +23,7 @@ class LanguageModelConfiguration {
     }
 
 
+    @Produces
     fun chatModelOpenAi(): ChatModel {
         return OpenAiChatModel.builder().apiKey("")
             .baseUrl("http://localhost:11434/v1")

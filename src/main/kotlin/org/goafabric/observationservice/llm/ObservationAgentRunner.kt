@@ -14,8 +14,7 @@ class ObservationAgentRunner(
     val observationAgent: ObservationAgent) {
     private val log: Logger = LoggerFactory.getLogger(this.javaClass.name)
 
-    fun onStart(@Observes ev: StartupEvent) {
-            if (true) { return }
+    fun run() {
             demoDataImporter.run()
             try {
                 val scanner = Scanner(System.`in`)
