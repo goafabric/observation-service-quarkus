@@ -1,7 +1,5 @@
 package org.goafabric.observationservice.extensions
 
-import io.opentelemetry.api.trace.Span
-import io.opentelemetry.context.Context
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.ws.rs.container.ContainerRequestContext
 import jakarta.ws.rs.container.ContainerRequestFilter
@@ -44,7 +42,7 @@ class HttpInterceptor : ContainerRequestFilter, ContainerResponseFilter {
 
     private fun configureLogsAndTracing() {
         MDC.put("tenantId", UserContext.tenantId)
-        Span.fromContext(Context.current()).setAttribute("tenant.id", UserContext.tenantId)
+        //Span.fromContext(Context.current()).setAttribute("tenant.id", UserContext.tenantId)
     }
 
 }

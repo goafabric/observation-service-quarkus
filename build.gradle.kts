@@ -42,8 +42,8 @@ dependencies {
 	implementation("io.quarkus:quarkus-smallrye-health")
 	implementation("io.quarkus:quarkus-micrometer-registry-prometheus")
 	implementation("io.quarkus:quarkus-smallrye-openapi")
-	implementation("io.quarkus:quarkus-opentelemetry")
-	implementation("io.opentelemetry.instrumentation:opentelemetry-jdbc")
+	//implementation("io.quarkus:quarkus-opentelemetry")
+	//implementation("io.opentelemetry.instrumentation:opentelemetry-jdbc")
 
 	//crosscutting
 	implementation("io.quarkus:quarkus-hibernate-validator")
