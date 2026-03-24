@@ -56,13 +56,13 @@ class VitalSignLogic(
     }
 
     fun getObservations() : List<Observation> {
-        return vitalSignMapper.map(vitalSignRepository.findAll().list())
+        return vitalSignMapper.map(vitalSignRepository.findAll().list().first().vitalSignDetails)
     }
 
     //uses workaround for lazy without mapping
     fun getByPatientId(patientId: String) : List<Observation> {
-        val vitalSigns = vitalSignRepository.findByPatientId(patientId)
-        return vitalSignMapper.map(vitalSigns.)
+        val vitalSigns = vitalSignRepository.findByPatientId(patientId).first().vitalSignDetails
+        return vitalSignMapper.map(vitalSigns)
     }
 
     private fun getPatientId(subject: String): String {
