@@ -6,6 +6,8 @@ import org.goafabric.observationservice.vitalsign.controller.dto.BloodPressure
 import org.goafabric.observationservice.vitalsign.controller.dto.BodyHeight
 import org.goafabric.observationservice.vitalsign.controller.dto.BodyWeight
 import org.goafabric.observationservice.vitalsign.controller.dto.Observation
+import org.goafabric.observationservice.vitalsign.controller.dto.VitalSign
+import org.goafabric.observationservice.vitalsign.logic.mapper.VitalSignMapper
 import org.goafabric.observationservice.vitalsign.persistence.VitalSignRepository
 import org.goafabric.observationservice.vitalsign.persistence.entity.VitalSignDetailsEo
 import org.goafabric.observationservice.vitalsign.persistence.entity.VitalSignEo
@@ -17,7 +19,8 @@ import java.time.LocalDateTime
 @ApplicationScoped
 @Transactional
 class VitalSignLogic(
-    val vitalSignRepository: VitalSignRepository) {
+    val vitalSignRepository: VitalSignRepository,
+    val vitalSignMapper: VitalSignMapper) {
     private val log: Logger = LoggerFactory.getLogger(this.javaClass.name)
 
     fun save(bloodPressure: BloodPressure) {
@@ -52,15 +55,14 @@ class VitalSignLogic(
         ))
     }
 
-    fun getObservations() : List<VitalSignEo> {
-        return vitalSignRepository.findAll().list() //.toList()
+    fun getObservations() : List<Observation> {
+        return vitalSignMapper.map(vitalSignRepository.findAll().list())
     }
 
     //uses workaround for lazy without mapping
-    fun getByPatientId(patientId: String) : List<VitalSignEo> {
+    fun getByPatientId(patientId: String) : List<Observation> {
         val vitalSigns = vitalSignRepository.findByPatientId(patientId)
-        vitalSigns.forEach { vitalSignEo -> vitalSignEo.vitalSignDetails.size }
-        return vitalSigns;
+        return vitalSignMapper.map(vitalSigns.)
     }
 
     private fun getPatientId(subject: String): String {

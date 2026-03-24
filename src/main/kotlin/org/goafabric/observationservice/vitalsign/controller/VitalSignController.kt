@@ -5,6 +5,7 @@ import jakarta.ws.rs.Path
 import jakarta.ws.rs.Produces
 import jakarta.ws.rs.QueryParam
 import jakarta.ws.rs.core.MediaType
+import org.goafabric.observationservice.vitalsign.controller.dto.Observation
 import org.goafabric.observationservice.vitalsign.logic.VitalSignLogic
 import org.goafabric.observationservice.vitalsign.persistence.entity.VitalSignEo
 
@@ -15,13 +16,13 @@ class VitalSignController(
 
     @GET
     @Path("/")
-    fun getObservations() : Iterable<VitalSignEo> {
+    fun getObservations() : Iterable<Observation> {
         return vitalSignLogic.getObservations()
     }
 
     @GET
     @Path("byPatientId")
-    fun getObservations(@QueryParam("patientId") patientId : String) : Iterable<VitalSignEo> {
+    fun getObservations(@QueryParam("patientId") patientId : String) : Iterable<Observation> {
         return vitalSignLogic.getByPatientId(patientId)
     }
 
