@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Laboratory Data</title>
+    <title>Vital Signs</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -24,7 +24,7 @@
             border: 1px solid #ccc;
             padding: 8px;
             vertical-align: top;
-            text-align: left; /* ✅ force left alignment */
+            text-align: left;
         }
 
         th {
@@ -46,7 +46,6 @@
             font-size: 12px;
         }
 
-        /* ✅ fixed label column for alignment */
         .sub-table td:first-child {
             width: 90px;
             white-space: nowrap;
@@ -54,15 +53,27 @@
             color: #666;
         }
 
-        /* ✅ prevent long values (like URLs) from breaking layout */
         .sub-table td:last-child {
             word-break: break-all;
+        }
+
+        .series-table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .series-table td {
+            border: 1px solid #ddd;
+            padding: 4px;
+            font-size: 12px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
-<h2>Laboratory Data Viewer</h2>
+<h2>Vital Signs Viewer</h2>
 
 <label>Patient:</label>
 <select id="patientId" onchange="loadData()">
@@ -76,6 +87,7 @@
     <thead>
     <tr>
         <th>Date</th>
+        <th>Type</th>
         <th>Code</th>
         <th>Value</th>
     </tr>
@@ -85,8 +97,7 @@
 
 <script>
     function formatDate(dateString) {
-        const date = new Date(dateString);
-        return date.toLocaleString("de-DE"); // 🇩🇪 European format
+        return new Date(dateString).toLocaleString("de-DE");
     }
 
     function parseCode(codeStr) {
@@ -102,6 +113,11 @@
     `;
     }
 
+    function extractValue(valueStr) {
+        const match = valueStr.match(/value=([^,]+)/);
+        return match ? match[1] : valueStr;
+    }
+
     function parseValue(valueStr) {
         const match = valueStr.match(/\((.*?)\)/);
         if (!match) return valueStr;
@@ -115,31 +131,59 @@
     `;
     }
 
+    function renderSeries(details) {
+        return `
+        <table class="series-table">
+            <tr>
+                ${details.map(d => `<td>${extractValue(d.valueQuantity)}</td>`).join("")}
+            </tr>
+        </table>
+    `;
+    }
+
     async function loadData() {
         const patientId = document.getElementById("patientId").value;
 
-        const response = await fetch(`/laboratory-data/byPatientId?patientId=${patientId}`);
+        const response = await fetch(`/vital-sign/byPatientId?patientId=${patientId}`);
         const data = await response.json();
 
         const tbody = document.querySelector("#resultTable tbody");
         tbody.innerHTML = "";
 
-        data.forEach(lab => {
-            lab.laboratoryDataDetails.forEach(detail => {
+        data.forEach(vital => {
+
+            // detect blood pressure series
+            const isSeries = vital.vitalSignDetails.length > 1 &&
+                vital.vitalSignDetails[0].type === "BLOOD_PRESSURE_SERIES";
+
+            if (isSeries) {
                 const row = document.createElement("tr");
 
                 row.innerHTML = `
-                <td>${formatDate(detail.effectiveDateTime)}</td>
-                <td>${parseCode(detail.code)}</td>
-                <td>${parseValue(detail.valueQuantity)}</td>
+                <td>${formatDate(vital.effectiveDateTime)}</td>
+                <td>BLOOD_PRESSURE_SERIES</td>
+                <td>${parseCode(vital.vitalSignDetails[0].code)}</td>
+                <td>${renderSeries(vital.vitalSignDetails)}</td>
             `;
 
                 tbody.appendChild(row);
-            });
+            } else {
+                vital.vitalSignDetails.forEach(detail => {
+                    const row = document.createElement("tr");
+
+                    row.innerHTML = `
+                    <td>${formatDate(detail.effectiveDateTime)}</td>
+                    <td>${detail.type}</td>
+                    <td>${parseCode(detail.code)}</td>
+                    <td>${parseValue(detail.valueQuantity)}</td>
+                `;
+
+                    tbody.appendChild(row);
+                });
+            }
         });
     }
 
-    // auto-load patient 1 on startup
     window.onload = loadData;
 </script>
 
