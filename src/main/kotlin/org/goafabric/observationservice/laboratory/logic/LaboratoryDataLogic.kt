@@ -27,7 +27,7 @@ class LaboratoryDataLogic(
             effectiveDateTime = LocalDateTime.now(), code = obervation.code.toString(), subject = obervation.subject, valueQuantity = obervation.valueQuantity.toString() ) }
 
         laboratoryDataRepository.save(
-            LaboratoryDataEo(patientId = patiendId, effectiveDateTime = LocalDateTime.now(), laboratoryDataDetailsEo = labDetails.toMutableList())
+            LaboratoryDataEo(patientId = patiendId, effectiveDateTime = LocalDateTime.now(), laboratoryDataDetails = labDetails.toMutableList())
         )
     }
 

@@ -19,5 +19,5 @@ class LaboratoryDataEo (
 
     @OneToMany(cascade = [CascadeType.ALL])
     @JoinColumn(name = "lab_id")
-    var laboratoryDataDetailsEo: MutableList<LaboratoryDataDetailsEo> = mutableListOf()
+    var laboratoryDataDetails: MutableList<LaboratoryDataDetailsEo> = mutableListOf()
 )

@@ -1,14 +1,9 @@
 package org.goafabric.observationservice.laboratory.persistence.entity
 
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import jakarta.persistence.Table
-import jakarta.persistence.Version
+import jakarta.persistence.*
 import java.time.LocalDateTime
 
-@Table(name = "laboratory_data")
+@Table(name = "laboratory_data_details")
 @Entity
 class LaboratoryDataDetailsEo (
     @Id
