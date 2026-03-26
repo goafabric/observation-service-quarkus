@@ -2,8 +2,8 @@ package org.goafabric.observationservice.llm
 
 import dev.langchain4j.agent.tool.Tool
 import jakarta.enterprise.context.ApplicationScoped
+import org.goafabric.observationservice.laboratory.controller.dto.LaboratoryData
 import org.goafabric.observationservice.laboratory.logic.LaboratoryDataLogic
-import org.goafabric.observationservice.laboratory.persistence.entity.LaboratoryDataEo
 import org.goafabric.observationservice.vitalsign.controller.dto.VitalSign
 import org.goafabric.observationservice.vitalsign.logic.VitalSignLogic
 import org.slf4j.Logger
@@ -22,7 +22,7 @@ class ObservationAdapter(val vitalSignLogic: VitalSignLogic, val laboratoryDataL
     }
 
     @Tool
-    fun getLaboratoryDataByPatientName(patientName: String): List<LaboratoryDataEo> {
+    fun getLaboratoryDataByPatientName(patientName: String): List<LaboratoryData> {
         log.info("retrieving laboratory data for $patientName")
         val labData = laboratoryDataLogic.getByPatientId(getPatientId(patientName))
         if (labData.toMutableList().isEmpty()) error("no laboratory found for $patientName")

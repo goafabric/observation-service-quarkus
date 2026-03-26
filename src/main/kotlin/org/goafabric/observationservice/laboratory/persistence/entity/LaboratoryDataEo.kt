@@ -8,7 +8,7 @@ import java.time.LocalDateTime
 class LaboratoryDataEo (
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    val id: String? = null,
+    var id: String? = null,
 
     @Version //optimistic locking
     var version: Long?= null,
@@ -19,5 +19,5 @@ class LaboratoryDataEo (
 
     @OneToMany(cascade = [CascadeType.ALL])
     @JoinColumn(name = "lab_id")
-    var laboratoryDataDetailsEo: List<LaboratoryDataDetailsEo> = mutableListOf()
+    var laboratoryDataDetailsEo: MutableList<LaboratoryDataDetailsEo> = mutableListOf()
 )

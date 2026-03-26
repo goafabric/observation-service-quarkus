@@ -23,7 +23,7 @@ class VitalSignLogic(
         vitalSignRepository.save(VitalSignEo(
             patientId = getPatientId(bloodPressure.subject),
             effectiveDateTime = LocalDateTime.now(),
-            vitalSignDetails = listOf(map(VitalSignType.BLOOD_PRESSURE, bloodPressure))
+            vitalSignDetails = mutableListOf(map(VitalSignType.BLOOD_PRESSURE, bloodPressure))
         ))
     }
 
@@ -31,7 +31,7 @@ class VitalSignLogic(
         vitalSignRepository.save(VitalSignEo(
             patientId = getPatientId(bloodPressures.first().subject),
             effectiveDateTime = LocalDateTime.now(),
-            vitalSignDetails = bloodPressures.map { bloodPressure -> map(VitalSignType.BLOOD_PRESSURE_SERIES, bloodPressure) }
+            vitalSignDetails = bloodPressures.map { bloodPressure -> map(VitalSignType.BLOOD_PRESSURE_SERIES, bloodPressure) }.toMutableList()
         ))
     }
 
@@ -39,7 +39,7 @@ class VitalSignLogic(
         vitalSignRepository.save(VitalSignEo(
             patientId = getPatientId(bodyHeight.subject),
             effectiveDateTime = LocalDateTime.now(),
-            vitalSignDetails = listOf(map(VitalSignType.BODY_HEIGHT, bodyHeight))
+            vitalSignDetails = mutableListOf(map(VitalSignType.BODY_HEIGHT, bodyHeight))
         ))
     }
 
@@ -47,7 +47,7 @@ class VitalSignLogic(
         vitalSignRepository.save(VitalSignEo(
             patientId = getPatientId(bodyWeight.subject),
             effectiveDateTime = LocalDateTime.now(),
-            vitalSignDetails = listOf(map(VitalSignType.BODY_WEIGHT, bodyWeight))
+            vitalSignDetails = mutableListOf(map(VitalSignType.BODY_WEIGHT, bodyWeight))
         ))
     }
 

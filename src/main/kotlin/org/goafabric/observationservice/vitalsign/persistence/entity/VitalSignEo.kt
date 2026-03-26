@@ -8,7 +8,7 @@ import java.time.LocalDateTime
 class VitalSignEo (
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    val id: String? = null,
+    var id: String? = null,
 
     @Version //optimistic locking
     var version: Long?= null,
@@ -19,5 +19,5 @@ class VitalSignEo (
 
     @OneToMany(cascade = [CascadeType.ALL])
     @JoinColumn(name = "vital_sign_id")
-    var vitalSignDetails: List<VitalSignDetailsEo> = mutableListOf()
+    var vitalSignDetails: MutableList<VitalSignDetailsEo> = mutableListOf()
 )
