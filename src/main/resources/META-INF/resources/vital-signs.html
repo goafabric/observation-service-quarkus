@@ -14,6 +14,11 @@
             font-size: 14px;
         }
 
+        img {
+            margin-top: 10px;
+            width: 120px;
+        }
+
         table {
             border-collapse: collapse;
             margin-top: 20px;
@@ -86,12 +91,14 @@
 <h2>Vital Signs</h2>
 
 <label>Patient:</label>
-<select id="patientId" onchange="loadData()">
+<select id="patientId" onchange="onPatientChange()">
     <option value="1" selected>1</option>
     <option value="2">2</option>
     <option value="3">3</option>
     <option value="4">4</option>
 </select>
+
+<br>
 
 <table id="resultTable">
     <thead>
@@ -105,9 +112,27 @@
     <tbody></tbody>
 </table>
 
+<img id="patientImage" src="" alt="Patient">
+
 <script>
     function formatDate(dateString) {
         return new Date(dateString).toLocaleString("de-DE");
+    }
+
+    function updateImage(patientId) {
+        const img = document.getElementById("patientImage");
+
+        if (patientId === "1") {
+            img.src = "https://upload.wikimedia.org/wikipedia/en/0/02/Homer_Simpson_2006.png";
+        } else if (patientId === "2") {
+            img.src = "https://upload.wikimedia.org/wikipedia/en/0/0b/Marge_Simpson.png";
+        } else if (patientId === "3") {
+            img.src = "https://upload.wikimedia.org/wikipedia/en/a/aa/Bart_Simpson_200px.png";
+        } else if (patientId === "4") {
+            img.src = "https://upload.wikimedia.org/wikipedia/en/e/ec/Lisa_Simpson.png";
+        } else {
+            img.src = "";
+        }
     }
 
     function parseCode(codeStr) {
@@ -167,16 +192,12 @@
             const x = i * stepX;
             const y = height - padding - ((v - min) / range) * (height - 2 * padding);
 
-            if (i === 0) {
-                ctx.moveTo(x, y);
-            } else {
-                ctx.lineTo(x, y);
-            }
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
         });
 
         ctx.stroke();
 
-        // draw points
         values.forEach((v, i) => {
             const x = i * stepX;
             const y = height - padding - ((v - min) / range) * (height - 2 * padding);
@@ -252,7 +273,18 @@
         });
     }
 
-    window.onload = loadData;
+    function onPatientChange() {
+        const patientId = document.getElementById("patientId").value;
+        updateImage(patientId);
+        loadData();
+    }
+
+    // initial load
+    window.onload = function() {
+        const patientId = document.getElementById("patientId").value;
+        updateImage(patientId);
+        loadData();
+    };
 </script>
 
 </body>
