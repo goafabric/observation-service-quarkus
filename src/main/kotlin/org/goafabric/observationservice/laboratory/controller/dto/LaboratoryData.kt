@@ -4,12 +4,12 @@ import java.time.LocalDateTime
 
 class LaboratoryData (
     val id: String,
-    var version: Long,
+    val version: Long,
 
-    var patientId: String,
+    val patientId: String,
 
-    var effectiveDateTime: LocalDateTime,
-    var laboratoryDataDetails: List<LaboratoryDataDetails> = mutableListOf()
+    val effectiveDateTime: LocalDateTime,
+    val laboratoryDataDetails: MutableList<LaboratoryDataDetails> = mutableListOf()
 )
 
 class LaboratoryDataDetails (
