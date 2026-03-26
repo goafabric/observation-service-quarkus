@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Laboratory Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        input, button {
+            padding: 8px;
+            font-size: 14px;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Laboratory Data Viewer</h2>
+
+<label>Patient ID:</label>
+<input type="text" id="patientId" value="1">
+<button onclick="loadData()">Load</button>
+
+<table id="resultTable">
+    <thead>
+    <tr>
+        <th>Lab ID</th>
+        <th>Date</th>
+        <th>Code</th>
+        <th>Value</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<script>
+    async function loadData() {
+        const patientId = document.getElementById("patientId").value;
+
+        const response = await fetch(`http://localhost:50700/laboratory-data/byPatientId?patientId=${patientId}`);
+        const data = await response.json();
+
+        const tbody = document.querySelector("#resultTable tbody");
+        tbody.innerHTML = "";
+
+        data.forEach(lab => {
+            lab.laboratoryDataDetails.forEach(detail => {
+                const row = document.createElement("tr");
+
+                row.innerHTML = `
+                <td>${lab.id}</td>
+                <td>${detail.effectiveDateTime}</td>
+                <td>${detail.code}</td>
+                <td>${detail.valueQuantity}</td>
+            `;
+
+                tbody.appendChild(row);
+            });
+        });
+    }
+</script>
+
+</body>
+</html>
