@@ -1,12 +1,25 @@
 package org.goafabric.observationservice.vitalsign.controller.dto
 
 import java.time.LocalDateTime
-import java.util.UUID
+
 
 data class VitalSign(
-    override val id: String?,
-    override val code: Coding,
-    override val subject: String,
-    override val effectiveDateTime: LocalDateTime,
-    override val valueQuantity: ValueQuantity,
-) : Observation
+    val id: String,
+    val version: Long,
+
+    val patientId: String,
+
+    val effectiveDateTime: LocalDateTime,
+
+    val vitalSignDetails: List<VitalSignDetails> = mutableListOf()
+)
+
+data class VitalSignDetails (
+    val id: String,
+    val version: Long,
+    val effectiveDateTime: LocalDateTime,
+    val type: String,
+    val code: String,
+    val subject: String,
+    val valueQuantity: String
+)

@@ -4,9 +4,8 @@ import dev.langchain4j.agent.tool.Tool
 import jakarta.enterprise.context.ApplicationScoped
 import org.goafabric.observationservice.laboratory.logic.LaboratoryDataLogic
 import org.goafabric.observationservice.laboratory.persistence.entity.LaboratoryDataEo
-import org.goafabric.observationservice.vitalsign.controller.dto.Observation
+import org.goafabric.observationservice.vitalsign.controller.dto.VitalSign
 import org.goafabric.observationservice.vitalsign.logic.VitalSignLogic
-import org.goafabric.observationservice.vitalsign.persistence.entity.VitalSignEo
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -15,7 +14,7 @@ class ObservationAdapter(val vitalSignLogic: VitalSignLogic, val laboratoryDataL
     private val log: Logger = LoggerFactory.getLogger(this.javaClass.name)
 
     @Tool
-    fun getVitalSignsByPatientName(patientName: String): List<Observation> {
+    fun getVitalSignsByPatientName(patientName: String): List<VitalSign> {
         log.info("retrieving vital signs for $patientName")
         val vitalSigns = vitalSignLogic.getByPatientId(getPatientId(patientName))
         if (vitalSigns.toMutableList().isEmpty()) error("no vital signs found for $patientName")

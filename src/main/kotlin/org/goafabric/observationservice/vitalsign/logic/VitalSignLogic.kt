@@ -2,11 +2,7 @@ package org.goafabric.observationservice.vitalsign.logic
 
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.transaction.Transactional
-import org.goafabric.observationservice.vitalsign.controller.dto.BloodPressure
-import org.goafabric.observationservice.vitalsign.controller.dto.BodyHeight
-import org.goafabric.observationservice.vitalsign.controller.dto.BodyWeight
-import org.goafabric.observationservice.vitalsign.controller.dto.Observation
-import org.goafabric.observationservice.vitalsign.controller.dto.VitalSign
+import org.goafabric.observationservice.vitalsign.controller.dto.*
 import org.goafabric.observationservice.vitalsign.logic.mapper.VitalSignMapper
 import org.goafabric.observationservice.vitalsign.persistence.VitalSignRepository
 import org.goafabric.observationservice.vitalsign.persistence.entity.VitalSignDetailsEo
@@ -55,13 +51,13 @@ class VitalSignLogic(
         ))
     }
 
-    fun getObservations() : List<Observation> {
-        return vitalSignMapper.map(vitalSignRepository.findAll().list().first().vitalSignDetails)
+    fun getObservations() : List<VitalSign> {
+        return vitalSignMapper.map(vitalSignRepository.findAll().list())
     }
 
     //uses workaround for lazy without mapping
-    fun getByPatientId(patientId: String) : List<Observation> {
-        val vitalSigns = vitalSignRepository.findByPatientId(patientId).first().vitalSignDetails
+    fun getByPatientId(patientId: String) : List<VitalSign> {
+        val vitalSigns = vitalSignRepository.findByPatientId(patientId)
         return vitalSignMapper.map(vitalSigns)
     }
 
