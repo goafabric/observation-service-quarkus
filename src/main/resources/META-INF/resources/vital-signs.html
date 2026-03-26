@@ -60,7 +60,6 @@
         .series-table {
             border-collapse: collapse;
             width: 100%;
-            margin-top: 5px;
         }
 
         .series-table td {
@@ -69,11 +68,22 @@
             font-size: 12px;
             text-align: center;
         }
+
+        .series-container {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        canvas {
+            width: 100%;
+            height: 60px;
+        }
     </style>
 </head>
 <body>
 
-<h2>Vital Signs Viewer</h2>
+<h2>Vital Signs</h2>
 
 <label>Patient:</label>
 <select id="patientId" onchange="loadData()">
@@ -131,13 +141,73 @@
     `;
     }
 
+    function drawChart(canvasId, values) {
+        const canvas = document.getElementById(canvasId);
+        if (!canvas) return;
+
+        const ctx = canvas.getContext("2d");
+
+        const width = canvas.width = canvas.offsetWidth;
+        const height = canvas.height = 60;
+
+        const padding = 5;
+
+        const min = Math.min(...values);
+        const max = Math.max(...values);
+        const range = max - min || 1;
+
+        const stepX = width / (values.length - 1);
+
+        ctx.clearRect(0, 0, width, height);
+
+        ctx.beginPath();
+        ctx.lineWidth = 2;
+
+        values.forEach((v, i) => {
+            const x = i * stepX;
+            const y = height - padding - ((v - min) / range) * (height - 2 * padding);
+
+            if (i === 0) {
+                ctx.moveTo(x, y);
+            } else {
+                ctx.lineTo(x, y);
+            }
+        });
+
+        ctx.stroke();
+
+        // draw points
+        values.forEach((v, i) => {
+            const x = i * stepX;
+            const y = height - padding - ((v - min) / range) * (height - 2 * padding);
+
+            ctx.beginPath();
+            ctx.arc(x, y, 2, 0, 2 * Math.PI);
+            ctx.fill();
+        });
+    }
+
     function renderSeries(details) {
-        return `
+        const values = details.map(d => parseFloat(extractValue(d.valueQuantity)));
+        const id = "chart-" + Math.random().toString(36).substring(2, 9);
+
+        const valuesHtml = `
         <table class="series-table">
             <tr>
-                ${details.map(d => `<td>${extractValue(d.valueQuantity)}</td>`).join("")}
+                ${values.map(v => `<td>${v}</td>`).join("")}
             </tr>
         </table>
+    `;
+
+        const canvasHtml = `<canvas id="${id}"></canvas>`;
+
+        setTimeout(() => drawChart(id, values), 0);
+
+        return `
+        <div class="series-container">
+            ${valuesHtml}
+            ${canvasHtml}
+        </div>
     `;
     }
 
@@ -151,8 +221,6 @@
         tbody.innerHTML = "";
 
         data.forEach(vital => {
-
-            // detect blood pressure series
             const isSeries = vital.vitalSignDetails.length > 1 &&
                 vital.vitalSignDetails[0].type === "BLOOD_PRESSURE_SERIES";
 
