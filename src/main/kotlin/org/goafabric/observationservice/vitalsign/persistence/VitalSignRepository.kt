@@ -5,7 +5,6 @@ import jakarta.data.repository.Find
 import jakarta.data.repository.Repository
 import org.goafabric.observationservice.vitalsign.persistence.entity.VitalSignEo
 
-@Repository
 interface VitalSignRepository : PanacheRepository.Managed<VitalSignEo, String> {
 
     @Find

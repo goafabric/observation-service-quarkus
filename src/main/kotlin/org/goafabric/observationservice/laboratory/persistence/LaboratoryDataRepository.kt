@@ -5,7 +5,6 @@ import jakarta.data.repository.Find
 import jakarta.data.repository.Repository
 import org.goafabric.observationservice.laboratory.persistence.entity.LaboratoryDataEo
 
-@Repository
 interface LaboratoryDataRepository : PanacheRepository.Managed<LaboratoryDataEo, String> {
     @Find
     fun findByPatientId(patientId: String) : List<LaboratoryDataEo>
