@@ -21,7 +21,7 @@ class ObservationAdapter(val vitalSignLogic: VitalSignLogic, val laboratoryDataL
         return vitalSigns
     }
 
-    @Tool
+    @Tool()
     fun getLaboratoryDataByPatientName(patientName: String): List<LaboratoryData> {
         log.info("retrieving laboratory data for $patientName")
         val labData = laboratoryDataLogic.getByPatientId(getPatientId(patientName))
