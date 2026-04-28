@@ -10,7 +10,7 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 @ApplicationScoped
-class ObservationAdapter(val vitalSignLogic: VitalSignLogic, val laboratoryDataLogic: LaboratoryDataLogic) {
+class ObservationTool(val vitalSignLogic: VitalSignLogic, val laboratoryDataLogic: LaboratoryDataLogic) {
     private val log: Logger = LoggerFactory.getLogger(this.javaClass.name)
 
     @Tool

@@ -33,11 +33,11 @@ class LanguageModelConfiguration {
     }
 
     @Produces
-    fun databaseAgent(chatLanguageModel: ChatModel?, observationAdapter: ObservationAdapter?): ObservationAgent? {
+    fun databaseAgent(chatLanguageModel: ChatModel?, observationTool: ObservationTool?): ObservationAgent? {
         return AiServices.builder<ObservationAgent?>(ObservationAgent::class.java)
             .chatModel(chatLanguageModel)
             .chatMemory(MessageWindowChatMemory.withMaxMessages(20))
-            .tools(io.quarkus.arc.ClientProxy.unwrap(observationAdapter))
+            .tools(io.quarkus.arc.ClientProxy.unwrap(observationTool))
             .build()
     }
 }
