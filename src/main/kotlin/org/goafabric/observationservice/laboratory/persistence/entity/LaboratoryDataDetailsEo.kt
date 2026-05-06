@@ -1,6 +1,7 @@
 package org.goafabric.observationservice.laboratory.persistence.entity
 
 import jakarta.persistence.*
+import org.goafabric.observationservice.laboratory.controller.dto.Coding
 import java.time.LocalDateTime
 
 @Table(name = "laboratory_data_details")
@@ -15,7 +16,8 @@ class LaboratoryDataDetailsEo (
 
     var effectiveDateTime: LocalDateTime,
 
-    var code: String,
+    @Embedded
+    var code: Coding,
 
     var subject: String,
 

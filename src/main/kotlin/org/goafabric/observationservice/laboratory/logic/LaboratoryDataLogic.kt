@@ -24,7 +24,7 @@ class LaboratoryDataLogic(
 
     fun save(observations: List<Observation>, patiendId: String) {
         val labDetails = observations.map { obervation -> LaboratoryDataDetailsEo(
-            effectiveDateTime = LocalDateTime.now(), code = obervation.code.toString(), subject = obervation.subject, valueQuantity = obervation.valueQuantity.toString() ) }
+            effectiveDateTime = LocalDateTime.now(), code = obervation.code, subject = obervation.subject, valueQuantity = obervation.valueQuantity.toString() ) }
 
         laboratoryDataRepository.save(
             LaboratoryHeadEo(patientId = patiendId, effectiveDateTime = LocalDateTime.now(), laboratoryDataDetails = labDetails.toMutableList())

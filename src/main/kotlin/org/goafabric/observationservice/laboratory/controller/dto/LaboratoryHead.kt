@@ -16,7 +16,7 @@ class LaboratoryDataDetails (
     val id: String,
     val version: Long,
     val effectiveDateTime: LocalDateTime,
-    val code: String,
+    val code: Coding,
     val subject: String,
     val valueQuantity: String
 )

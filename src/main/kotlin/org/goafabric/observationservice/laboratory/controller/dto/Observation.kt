@@ -6,7 +6,7 @@ import java.util.UUID
 
 data class Observation (
     val id: String? = UUID.randomUUID().toString(),
-    val code: Coding?,
+    val code: Coding,
     val subject: String,
     val valueQuantity: ValueQuantity,
     val effectiveDateTime: LocalDateTime
