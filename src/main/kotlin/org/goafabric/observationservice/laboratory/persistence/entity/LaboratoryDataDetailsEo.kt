@@ -2,6 +2,8 @@ package org.goafabric.observationservice.laboratory.persistence.entity
 
 import jakarta.persistence.*
 import org.goafabric.observationservice.laboratory.controller.dto.Coding
+import org.goafabric.observationservice.laboratory.controller.dto.ValueQuantity
+import org.hibernate.annotations.EmbeddedColumnNaming
 import java.time.LocalDateTime
 
 @Table(name = "laboratory_data_details")
@@ -17,9 +19,12 @@ class LaboratoryDataDetailsEo (
     var effectiveDateTime: LocalDateTime,
 
     @Embedded
+    @EmbeddedColumnNaming("code_%s")
     var code: Coding,
 
     var subject: String,
 
-    var valueQuantity: String
+    @Embedded
+    @EmbeddedColumnNaming("value_%s")
+    var valueQuantity: ValueQuantity
 )

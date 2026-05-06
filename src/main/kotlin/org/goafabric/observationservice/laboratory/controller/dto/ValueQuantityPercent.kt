@@ -7,4 +7,4 @@ data class ValueQuantityPercent (
     override val unit: String = "%",
     override val value: Double,
     override val system: String = "http://unitsofmeasure.org"
-) : ValueQuantity
+) : ValueQuantity(code, unit, value, system)

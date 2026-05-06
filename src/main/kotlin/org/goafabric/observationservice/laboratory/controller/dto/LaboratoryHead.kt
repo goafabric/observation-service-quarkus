@@ -18,5 +18,5 @@ class LaboratoryDataDetails (
     val effectiveDateTime: LocalDateTime,
     val code: Coding,
     val subject: String,
-    val valueQuantity: String
+    val valueQuantity: ValueQuantity
 )
