@@ -2,7 +2,7 @@ package org.goafabric.observationservice.laboratory.controller.dto
 
 import java.time.LocalDateTime
 
-class LaboratoryData (
+class LaboratoryHead (
     val id: String,
     val version: Long,
 

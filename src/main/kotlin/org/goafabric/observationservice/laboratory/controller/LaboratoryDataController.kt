@@ -5,7 +5,7 @@ import jakarta.ws.rs.Path
 import jakarta.ws.rs.Produces
 import jakarta.ws.rs.QueryParam
 import jakarta.ws.rs.core.MediaType
-import org.goafabric.observationservice.laboratory.controller.dto.LaboratoryData
+import org.goafabric.observationservice.laboratory.controller.dto.LaboratoryHead
 import org.goafabric.observationservice.laboratory.logic.LaboratoryDataLogic
 
 @Path("/laboratory-data")
@@ -15,7 +15,7 @@ class LaboratoryDataController(
 
     @GET
     @Path("byPatientId")
-    fun getObservations(@QueryParam("patientId") patientId : String) : List<LaboratoryData> {
+    fun getObservations(@QueryParam("patientId") patientId : String) : List<LaboratoryHead> {
         return laboratoryLogic.getByPatientId(patientId)
     }
 

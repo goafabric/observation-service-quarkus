@@ -2,15 +2,14 @@ package org.goafabric.observationservice.laboratory.persistence
 
 import io.quarkus.hibernate.panache.PanacheRepository
 import jakarta.data.repository.Find
-import jakarta.data.repository.Repository
-import org.goafabric.observationservice.laboratory.persistence.entity.LaboratoryDataEo
+import org.goafabric.observationservice.laboratory.persistence.entity.LaboratoryHeadEo
 
-interface LaboratoryDataRepository : PanacheRepository.Managed<LaboratoryDataEo, String> {
+interface LaboratoryDataRepository : PanacheRepository.Managed<LaboratoryHeadEo, String> {
     @Find
-    fun findByPatientId(patientId: String) : List<LaboratoryDataEo>
+    fun findByPatientId(patientId: String) : List<LaboratoryHeadEo>
 
-    fun save(laboratoryDataEo: LaboratoryDataEo): LaboratoryDataEo {
-        persist(laboratoryDataEo)
-        return laboratoryDataEo
+    fun save(laboratoryHeadEo: LaboratoryHeadEo): LaboratoryHeadEo {
+        persist(laboratoryHeadEo)
+        return laboratoryHeadEo
     }
 }

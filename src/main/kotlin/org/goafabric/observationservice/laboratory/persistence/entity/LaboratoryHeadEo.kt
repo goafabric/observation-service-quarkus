@@ -5,7 +5,7 @@ import java.time.LocalDateTime
 
 @Table(name = "laboratory_data")
 @Entity
-class LaboratoryDataEo (
+class LaboratoryHeadEo (
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     var id: String? = null,
