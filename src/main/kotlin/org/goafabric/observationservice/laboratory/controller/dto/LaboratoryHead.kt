@@ -9,14 +9,5 @@ class LaboratoryHead (
     val patientId: String,
 
     val effectiveDateTime: LocalDateTime,
-    val laboratoryDataDetails: MutableList<LaboratoryDataDetails> = mutableListOf()
-)
-
-class LaboratoryDataDetails (
-    val id: String,
-    val version: Long,
-    val effectiveDateTime: LocalDateTime,
-    val code: Coding,
-    val subject: String,
-    val valueQuantity: ValueQuantity
+    val laboratoryDataDetails: MutableList<Observation> = mutableListOf()
 )
