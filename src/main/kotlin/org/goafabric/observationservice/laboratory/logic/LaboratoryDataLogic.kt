@@ -2,6 +2,7 @@ package org.goafabric.observationservice.laboratory.logic
 
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.transaction.Transactional
+import org.goafabric.observationservice.laboratory.controller.dto.CObservation
 import org.goafabric.observationservice.laboratory.controller.dto.LaboratoryData
 import org.goafabric.observationservice.laboratory.controller.dto.Observation
 import org.goafabric.observationservice.laboratory.logic.mapper.LaboratoryDataMapper
@@ -22,7 +23,7 @@ class LaboratoryDataLogic(
         return laboratoryDataMapper.map(laboratoryData)
     }
 
-    fun save(observations: List<Observation>, patiendId: String) {
+    fun save(observations: List<CObservation>, patiendId: String) {
         val labDetails = observations.map { obervation -> LaboratoryDataDetailsEo(
             effectiveDateTime = LocalDateTime.now(), code = obervation.code.toString(), subject = obervation.subject, valueQuantity = obervation.valueQuantity.toString() ) }
 

@@ -15,8 +15,8 @@ class LDTImportLogic(
         laboratoryLogic.save(observations, patiendId)
     }
 
-    fun parse(lines: List<String>): MutableList<Observation> {
-        val observations = mutableListOf<Observation>()
+    fun parse(lines: List<String>): MutableList<CObservation> {
+        val observations = mutableListOf<CObservation>()
 
         for (line in lines) {
             val fields = line.split(",")
@@ -29,25 +29,28 @@ class LDTImportLogic(
 
                 when (type) {
                     "GLU" -> observations.add(
-                        Glucose(subject = "Patient/${patientId}",
+                        CObservation(subject = "Patient/${patientId}",
                             valueQuantity = ValueQuantityMol(value = valueQuantity.toDouble()),
+                            code = Coding("http://loinc.org", "15074-8", "Glucose [Moles/volume] in Blood"),
                             effectiveDateTime = LocalDate.parse(
                                 currentDate,
                                 DateTimeFormatter.ofPattern("yyyy-MM-dd")
                             ).atStartOfDay()
                         ))
                     "CHOL" -> observations.add(
-                        CholesterolTotal(subject = "Patient/${patientId}",
+                        CObservation(subject = "Patient/${patientId}",
                             valueQuantity = ValueQuantityMol(value = valueQuantity.toDouble()),
+                            code = Coding("http://loinc.org", "2098-6", "Cholesterol [Moles/Volume]"),
                             effectiveDateTime = LocalDate.parse(
                                 currentDate,
                                 DateTimeFormatter.ofPattern("yyyy-MM-dd")
                             ).atStartOfDay()
                         ))
                     "HDL" -> observations.add(
-                        CholesterolHdl(
+                        CObservation(
                             subject = "Patient/${patientId}",
                             valueQuantity = ValueQuantityMol(value = valueQuantity.toDouble()),
+                            code = Coding("http://loinc.org", "2086-7", "Cholesterol Hdl [Moles/Volume]"),
                             effectiveDateTime = LocalDate.parse(
                                 currentDate,
                                 DateTimeFormatter.ofPattern("yyyy-MM-dd")
@@ -55,9 +58,10 @@ class LDTImportLogic(
                         )
                     )
                     "LDL" -> observations.add(
-                        CholesterolLdl(
+                        CObservation(
                             subject = "Patient/${patientId}",
                             valueQuantity = ValueQuantityMol(value = valueQuantity.toDouble()),
+                            code = Coding("http://loinc.org", "18262-6", "Cholesterol Ldl [Moles/Volume]"),
                             effectiveDateTime = LocalDate.parse(
                                 currentDate,
                                 DateTimeFormatter.ofPattern("yyyy-MM-dd")
@@ -65,9 +69,10 @@ class LDTImportLogic(
                         )
                     )
                     "HbA1c" -> observations.add(
-                        HemoGlobin(
+                        CObservation(
                             subject = "Patient/${patientId}",
                             valueQuantity = ValueQuantityPercent(value = valueQuantity.toDouble()),
+                            code = Coding("http://loinc.org", "4548-4", "Hemoglobin [Moles/Volume]"),
                             effectiveDateTime = LocalDate.parse(
                                 currentDate,
                                 DateTimeFormatter.ofPattern("yyyy-MM-dd")
@@ -75,9 +80,10 @@ class LDTImportLogic(
                         )
                     )
                     "AST" -> observations.add(
-                        Ast(
+                        CObservation(
                             subject = "Patient/${patientId}",
                             valueQuantity = ValueQuantityEnzyme(value = valueQuantity.toDouble()),
+                            code = Coding("http://loinc.org", "1920-8", "Aspartate aminotransferase (AST) [Enzymatic activity/volume] in Serum or Plasma"),
                             effectiveDateTime = LocalDate.parse(
                                 currentDate,
                                 DateTimeFormatter.ofPattern("yyyy-MM-dd")
@@ -85,9 +91,10 @@ class LDTImportLogic(
                         )
                     )
                     "ALT" -> observations.add(
-                        Alt(
+                        CObservation(
                             subject = "Patient/${patientId}",
                             valueQuantity = ValueQuantityEnzyme(value = valueQuantity.toDouble()),
+                            code = Coding("http://loinc.org", "1742-6", "Alanine aminotransferase (ALT) [Enzymatic activity/volume] in Serum or Plasma"),
                             effectiveDateTime = LocalDate.parse(
                                 currentDate,
                                 DateTimeFormatter.ofPattern("yyyy-MM-dd")
@@ -95,9 +102,10 @@ class LDTImportLogic(
                         )
                     )
                     "TSH" -> observations.add(
-                        Thyrotropin(
+                        CObservation(
                             subject = "Patient/${patientId}",
                             valueQuantity = ValueQuantityIU(value = valueQuantity.toDouble()),
+                            code = Coding("http://loinc.org", "11579-0", "Thyrotropin (TSH) [Units/volume] in Serum or Plasma"),
                             effectiveDateTime = LocalDate.parse(
                                 currentDate,
                                 DateTimeFormatter.ofPattern("yyyy-MM-dd")
