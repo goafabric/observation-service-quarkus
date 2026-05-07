@@ -1,6 +1,6 @@
-package org.goafabric.observationservice.laboratory.controller.dto
+package org.goafabric.observationservice.laboratory.persistence.quantity
 
-import java.time.LocalDateTime
+import org.goafabric.observationservice.laboratory.controller.dto.ValueQuantity
 
 data class ValueQuantityPercent (
     override val code: String = "%",

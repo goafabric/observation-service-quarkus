@@ -2,6 +2,10 @@ package org.goafabric.observationservice.laboratory.logic
 
 import jakarta.enterprise.context.ApplicationScoped
 import org.goafabric.observationservice.laboratory.controller.dto.*
+import org.goafabric.observationservice.laboratory.persistence.quantity.ValueQuantityEnzyme
+import org.goafabric.observationservice.laboratory.persistence.quantity.ValueQuantityIU
+import org.goafabric.observationservice.laboratory.persistence.quantity.ValueQuantityMol
+import org.goafabric.observationservice.laboratory.persistence.quantity.ValueQuantityPercent
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 

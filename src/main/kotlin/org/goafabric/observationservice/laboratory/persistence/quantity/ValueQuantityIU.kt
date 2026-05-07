@@ -1,4 +1,6 @@
-package org.goafabric.observationservice.laboratory.controller.dto
+package org.goafabric.observationservice.laboratory.persistence.quantity
+
+import org.goafabric.observationservice.laboratory.controller.dto.ValueQuantity
 
 data class ValueQuantityIU(
     override val code: String = "uIU/mL",
