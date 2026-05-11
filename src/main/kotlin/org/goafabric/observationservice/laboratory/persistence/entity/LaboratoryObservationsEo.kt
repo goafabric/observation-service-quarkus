@@ -6,9 +6,9 @@ import org.goafabric.observationservice.laboratory.controller.dto.ValueQuantity
 import org.hibernate.annotations.EmbeddedColumnNaming
 import java.time.LocalDateTime
 
-@Table(name = "laboratory_data_details")
+@Table(name = "laboratory_observations")
 @Entity
-class LaboratoryDataDetailsEo (
+class LaboratoryObservationsEo (
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     var id: String? = null,
