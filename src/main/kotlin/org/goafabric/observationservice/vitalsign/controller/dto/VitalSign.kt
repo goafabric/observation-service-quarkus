@@ -11,15 +11,5 @@ data class VitalSign(
 
     val effectiveDateTime: LocalDateTime,
 
-    val vitalSignDetails: List<VitalSignDetails> = mutableListOf()
-)
-
-data class VitalSignDetails (
-    val id: String,
-    val version: Long,
-    val effectiveDateTime: LocalDateTime,
-    val type: String,
-    val code: String,
-    val subject: String,
-    val valueQuantity: String
+    val observations: List<Observation> = mutableListOf()
 )

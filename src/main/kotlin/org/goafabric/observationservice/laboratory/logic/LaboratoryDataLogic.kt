@@ -6,7 +6,7 @@ import org.goafabric.observationservice.laboratory.controller.dto.Observation
 import org.goafabric.observationservice.laboratory.controller.dto.LaboratoryHead
 import org.goafabric.observationservice.laboratory.logic.mapper.LaboratoryDataMapper
 import org.goafabric.observationservice.laboratory.persistence.LaboratoryDataRepository
-import org.goafabric.observationservice.laboratory.persistence.entity.LaboratoryObservationsEo
+import org.goafabric.observationservice.laboratory.persistence.entity.LaboratoryObservationEo
 import org.goafabric.observationservice.laboratory.persistence.entity.LaboratoryHeadEo
 import java.time.LocalDateTime
 
@@ -23,7 +23,7 @@ class LaboratoryDataLogic(
     }
 
     fun save(observations: List<Observation>, patiendId: String) {
-        val labDetails = observations.map { obervation -> LaboratoryObservationsEo(
+        val labDetails = observations.map { obervation -> LaboratoryObservationEo(
             effectiveDateTime = LocalDateTime.now(), code = obervation.code, subject = obervation.subject, valueQuantity = obervation.valueQuantity) }
 
         laboratoryDataRepository.save(

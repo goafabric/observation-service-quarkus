@@ -8,7 +8,7 @@ import java.time.LocalDateTime
 
 @Table(name = "laboratory_observations")
 @Entity
-class LaboratoryObservationsEo (
+class LaboratoryObservationEo (
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     var id: String? = null,

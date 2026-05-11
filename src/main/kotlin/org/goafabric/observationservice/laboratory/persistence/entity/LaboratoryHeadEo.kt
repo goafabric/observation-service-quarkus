@@ -3,7 +3,7 @@ package org.goafabric.observationservice.laboratory.persistence.entity
 import jakarta.persistence.*
 import java.time.LocalDateTime
 
-@Table(name = "laboratory_data")
+@Table(name = "laboratory_head")
 @Entity
 class LaboratoryHeadEo (
     @Id
@@ -19,5 +19,5 @@ class LaboratoryHeadEo (
 
     @OneToMany(cascade = [CascadeType.ALL])
     @JoinColumn(name = "lab_id")
-    var observations: MutableList<LaboratoryObservationsEo> = mutableListOf()
+    var observations: MutableList<LaboratoryObservationEo> = mutableListOf()
 )

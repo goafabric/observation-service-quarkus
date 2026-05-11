@@ -3,9 +3,9 @@ package org.goafabric.observationservice.vitalsign.persistence.entity
 import jakarta.persistence.*
 import java.time.LocalDateTime
 
-@Table(name = "vital_sign")
+@Table(name = "vital_sign_head")
 @Entity
-class VitalSignEo (
+class VitalSignHeadEo (
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     var id: String? = null,
@@ -19,5 +19,5 @@ class VitalSignEo (
 
     @OneToMany(cascade = [CascadeType.ALL])
     @JoinColumn(name = "vital_sign_id")
-    var vitalSignDetails: MutableList<VitalSignDetailsEo> = mutableListOf()
+    var observations: MutableList<VitalSignObservationEo> = mutableListOf()
 )

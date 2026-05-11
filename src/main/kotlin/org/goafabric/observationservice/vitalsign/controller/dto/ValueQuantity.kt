@@ -1,8 +1,11 @@
 package org.goafabric.observationservice.vitalsign.controller.dto
 
-interface ValueQuantity {
-    val code: String
-    val unit: String
-    val value: Number
-    val system: String
-}
+import jakarta.persistence.Embeddable
+
+@Embeddable
+open class ValueQuantity (
+    open val code: String,
+    open val unit: String,
+    open val value: Number,
+    open val system: String,
+)

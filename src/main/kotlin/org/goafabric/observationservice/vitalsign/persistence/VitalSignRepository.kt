@@ -2,17 +2,16 @@ package org.goafabric.observationservice.vitalsign.persistence
 
 import io.quarkus.hibernate.panache.PanacheRepository
 import jakarta.data.repository.Find
-import jakarta.data.repository.Repository
-import org.goafabric.observationservice.vitalsign.persistence.entity.VitalSignEo
+import org.goafabric.observationservice.vitalsign.persistence.entity.VitalSignHeadEo
 
-interface VitalSignRepository : PanacheRepository.Managed<VitalSignEo, String> {
+interface VitalSignRepository : PanacheRepository.Managed<VitalSignHeadEo, String> {
 
     @Find
-    fun findByPatientId(patientId: String) : List<VitalSignEo>
+    fun findByPatientId(patientId: String) : List<VitalSignHeadEo>
 
-    fun save(vitalSignEo: VitalSignEo): VitalSignEo {
-        persist(vitalSignEo)
-        return vitalSignEo
+    fun save(vitalSignHead: VitalSignHeadEo): VitalSignHeadEo {
+        persist(vitalSignHead)
+        return vitalSignHead
     }
 
 }

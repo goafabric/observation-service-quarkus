@@ -5,9 +5,8 @@ import jakarta.transaction.Transactional
 import org.goafabric.observationservice.vitalsign.controller.dto.*
 import org.goafabric.observationservice.vitalsign.logic.mapper.VitalSignMapper
 import org.goafabric.observationservice.vitalsign.persistence.VitalSignRepository
-import org.goafabric.observationservice.vitalsign.persistence.entity.VitalSignDetailsEo
-import org.goafabric.observationservice.vitalsign.persistence.entity.VitalSignEo
-import org.goafabric.observationservice.vitalsign.persistence.entity.VitalSignType
+import org.goafabric.observationservice.vitalsign.persistence.entity.VitalSignHeadEo
+import org.goafabric.observationservice.vitalsign.persistence.entity.VitalSignObservationEo
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.time.LocalDateTime
@@ -19,37 +18,26 @@ class VitalSignLogic(
     val vitalSignMapper: VitalSignMapper) {
     private val log: Logger = LoggerFactory.getLogger(this.javaClass.name)
 
-    fun save(bloodPressure: BloodPressure) {
-        vitalSignRepository.save(VitalSignEo(
-            patientId = getPatientId(bloodPressure.subject),
-            effectiveDateTime = LocalDateTime.now(),
-            vitalSignDetails = mutableListOf(map(VitalSignType.BLOOD_PRESSURE, bloodPressure))
-        ))
+    fun save(observation: Observation) {
+        save(listOf(observation))
     }
 
-    fun save(bloodPressures: List<BloodPressure>) {
-        vitalSignRepository.save(VitalSignEo(
-            patientId = getPatientId(bloodPressures.first().subject),
-            effectiveDateTime = LocalDateTime.now(),
-            vitalSignDetails = bloodPressures.map { bloodPressure -> map(VitalSignType.BLOOD_PRESSURE_SERIES, bloodPressure) }.toMutableList()
-        ))
+    fun save(observations: List<Observation>) {
+        val patientId = getPatientId(observations.first().subject)
+        val labDetails = observations.map { obervation ->
+            VitalSignObservationEo(
+                effectiveDateTime = LocalDateTime.now(),
+                code = obervation.code,
+                subject = obervation.subject,
+                valueQuantity = obervation.valueQuantity
+            )
+        }
+
+        vitalSignRepository.save(
+            VitalSignHeadEo(patientId = patientId, effectiveDateTime = LocalDateTime.now(), observations = labDetails.toMutableList())
+        )
     }
 
-    fun save(bodyHeight: BodyHeight) {
-        vitalSignRepository.save(VitalSignEo(
-            patientId = getPatientId(bodyHeight.subject),
-            effectiveDateTime = LocalDateTime.now(),
-            vitalSignDetails = mutableListOf(map(VitalSignType.BODY_HEIGHT, bodyHeight))
-        ))
-    }
-
-    fun save(bodyWeight: BodyWeight) {
-        vitalSignRepository.save(VitalSignEo(
-            patientId = getPatientId(bodyWeight.subject),
-            effectiveDateTime = LocalDateTime.now(),
-            vitalSignDetails = mutableListOf(map(VitalSignType.BODY_WEIGHT, bodyWeight))
-        ))
-    }
 
     fun getObservations() : List<VitalSign> {
         return vitalSignMapper.map(vitalSignRepository.findAll().list())
@@ -65,8 +53,4 @@ class VitalSignLogic(
         return subject.replace("Patient/", "")
     }
 
-    private fun map(type: VitalSignType, observation: Observation) : VitalSignDetailsEo {
-        return VitalSignDetailsEo(type = type.toString(), effectiveDateTime = LocalDateTime.now(),
-            code = observation.code.toString(), subject = observation.subject, valueQuantity = observation.valueQuantity.toString())
-    }
 }

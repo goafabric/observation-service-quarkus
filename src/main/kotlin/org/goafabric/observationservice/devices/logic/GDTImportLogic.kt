@@ -1,15 +1,16 @@
 package org.goafabric.observationservice.devices.logic
 
 import jakarta.enterprise.context.ApplicationScoped
-import org.goafabric.observationservice.vitalsign.controller.dto.BloodPressure
-import org.goafabric.observationservice.vitalsign.controller.dto.ValueQuantityMmHg
+import org.goafabric.observationservice.vitalsign.controller.dto.Coding
+import org.goafabric.observationservice.vitalsign.controller.dto.Observation
+import org.goafabric.observationservice.vitalsign.persistence.quantity.ValueQuantityMmHg
 import org.goafabric.observationservice.vitalsign.logic.VitalSignLogic
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 @ApplicationScoped
 class GDTImportLogic(val vitalSignLogic: VitalSignLogic) {
-    fun import(fileName: String): List<BloodPressure> {
+    fun import(fileName: String): List<Observation> {
         val file = readFile(fileName)
         if (file.containsAll(listOf("840200SYS", "840400DIA"))) {
             val bloodPressures = parseBloodPressure(readFile(fileName))
@@ -20,8 +21,8 @@ class GDTImportLogic(val vitalSignLogic: VitalSignLogic) {
         }
     }
 
-    fun parseBloodPressure(gdtLines: List<String>): List<BloodPressure> {
-        val observations = mutableListOf<BloodPressure>()
+    fun parseBloodPressure(gdtLines: List<String>): List<Observation> {
+        val observations = mutableListOf<Observation>()
         var patientId = ""
         var patientName = ""
 
@@ -46,9 +47,10 @@ class GDTImportLogic(val vitalSignLogic: VitalSignLogic) {
                     "840700" -> { // At this point, we have a full measurement, add to list
                         pulse = value.toIntOrNull() ?: 0
                         observations.add(
-                            BloodPressure(
+                            Observation(
                                 subject = "Patient/${patientId}",
                                 valueQuantity = ValueQuantityMmHg(value = systolic),
+                                code = Coding("http://loinc.org", "85354-6", "Blood Pressure"),
                                 //todo: diastolic
                                 effectiveDateTime = LocalDateTime.parse(
                                     "$currentDate $currentTime",
