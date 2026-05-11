@@ -89,28 +89,23 @@
         return date.toLocaleString("de-DE"); // 🇩🇪 European format
     }
 
-    function parseCode(codeStr) {
-        const match = codeStr.match(/system=(.*?), code=(.*?), display=(.*)\)/);
-        if (!match) return codeStr;
-
+    function parseCode(coding) {
         return `
         <table class="sub-table">
-            <tr><td>System:</td><td>${match[1]}</td></tr>
-            <tr><td>Code:</td><td>${match[2]}</td></tr>
-            <tr><td>Display:</td><td>${match[3]}</td></tr>
+            <tr><td>System:</td><td>${coding.system}</td></tr>
+            <tr><td>Code:</td><td>${coding.code}</td></tr>
+            <tr><td>Display:</td><td>${coding.display}</td></tr>
         </table>
     `;
     }
 
-    function parseValue(valueStr) {
-        const match = valueStr.match(/\((.*?)\)/);
-        if (!match) return valueStr;
-
-        const parts = match[1].split(", ").map(p => p.split("="));
-
+    function parseValue(vq) {
         return `
         <table class="sub-table">
-            ${parts.map(p => `<tr><td>${p[0]}:</td><td>${p[1]}</td></tr>`).join("")}
+            <tr><td>value:</td><td>${vq.value}</td></tr>
+            <tr><td>unit:</td><td>${vq.unit}</td></tr>
+            <tr><td>code:</td><td>${vq.code}</td></tr>
+            <tr><td>system:</td><td>${vq.system}</td></tr>
         </table>
     `;
     }

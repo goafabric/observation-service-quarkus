@@ -135,33 +135,27 @@
         }
     }
 
-    function parseCode(codeStr) {
-        const match = codeStr.match(/system=(.*?), code=(.*?), display=(.*)\)/);
-        if (!match) return codeStr;
-
+    function parseCode(coding) {
         return `
         <table class="sub-table">
-            <tr><td>System:</td><td>${match[1]}</td></tr>
-            <tr><td>Code:</td><td>${match[2]}</td></tr>
-            <tr><td>Display:</td><td>${match[3]}</td></tr>
+            <tr><td>System:</td><td>${coding.system}</td></tr>
+            <tr><td>Code:</td><td>${coding.code}</td></tr>
+            <tr><td>Display:</td><td>${coding.display}</td></tr>
         </table>
     `;
     }
 
-    function extractValue(valueStr) {
-        const match = valueStr.match(/value=([^,]+)/);
-        return match ? match[1] : valueStr;
+    function extractValue(vq) {
+        return vq.value;
     }
 
-    function parseValue(valueStr) {
-        const match = valueStr.match(/\((.*?)\)/);
-        if (!match) return valueStr;
-
-        const parts = match[1].split(", ").map(p => p.split("="));
-
+    function parseValue(vq) {
         return `
         <table class="sub-table">
-            ${parts.map(p => `<tr><td>${p[0]}:</td><td>${p[1]}</td></tr>`).join("")}
+            <tr><td>value:</td><td>${vq.value}</td></tr>
+            <tr><td>unit:</td><td>${vq.unit}</td></tr>
+            <tr><td>code:</td><td>${vq.code}</td></tr>
+            <tr><td>system:</td><td>${vq.system}</td></tr>
         </table>
     `;
     }
@@ -242,8 +236,7 @@
         tbody.innerHTML = "";
 
         data.forEach(vital => {
-            const isSeries = vital.vitalSignDetails.length > 1 &&
-                vital.vitalSignDetails[0].type === "BLOOD_PRESSURE_SERIES";
+            const isSeries = vital.observations.length > 1;
 
             if (isSeries) {
                 const row = document.createElement("tr");
@@ -251,18 +244,18 @@
                 row.innerHTML = `
                 <td>${formatDate(vital.effectiveDateTime)}</td>
                 <td>BLOOD_PRESSURE_SERIES</td>
-                <td>${parseCode(vital.vitalSignDetails[0].code)}</td>
-                <td>${renderSeries(vital.vitalSignDetails)}</td>
+                <td>${parseCode(vital.observations[0].code)}</td>
+                <td>${renderSeries(vital.observations)}</td>
             `;
 
                 tbody.appendChild(row);
             } else {
-                vital.vitalSignDetails.forEach(detail => {
+                vital.observations.forEach(detail => {
                     const row = document.createElement("tr");
 
                     row.innerHTML = `
                     <td>${formatDate(detail.effectiveDateTime)}</td>
-                    <td>${detail.type}</td>
+                    <td>${detail.code.display}</td>
                     <td>${parseCode(detail.code)}</td>
                     <td>${parseValue(detail.valueQuantity)}</td>
                 `;
