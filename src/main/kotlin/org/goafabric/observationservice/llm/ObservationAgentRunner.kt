@@ -1,3 +1,4 @@
+/*
 package org.goafabric.observationservice.llm
 
 import io.quarkus.runtime.StartupEvent
@@ -28,3 +29,4 @@ class ObservationAgentRunner(
         }
 
 }
+*/

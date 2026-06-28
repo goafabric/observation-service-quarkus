@@ -1,6 +1,6 @@
 package org.goafabric.observationservice.llm
 
-import dev.langchain4j.agent.tool.Tool
+import io.quarkiverse.mcp.server.Tool
 import jakarta.enterprise.context.ApplicationScoped
 import org.goafabric.observationservice.laboratory.controller.dto.LaboratoryHead
 import org.goafabric.observationservice.laboratory.logic.LaboratoryDataLogic

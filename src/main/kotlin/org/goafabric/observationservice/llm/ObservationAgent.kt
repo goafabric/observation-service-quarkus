@@ -1,3 +1,4 @@
+/*
 package org.goafabric.observationservice.llm
 
 import dev.langchain4j.service.SystemMessage
@@ -15,4 +16,4 @@ interface ObservationAgent {
         "Please talk in english"
     )
     fun chat(userMessage: String?): String?
-}
+}*/

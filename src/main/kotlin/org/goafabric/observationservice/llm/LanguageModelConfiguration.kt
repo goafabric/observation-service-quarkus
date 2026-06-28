@@ -1,3 +1,4 @@
+/*
 package org.goafabric.observationservice.llm
 
 import dev.langchain4j.memory.chat.MessageWindowChatMemory
@@ -41,3 +42,4 @@ class LanguageModelConfiguration {
             .build()
     }
 }
+*/

@@ -10,7 +10,7 @@ val dockerRegistry = "goafabric"
 plugins {
 	java
 	jacoco
-	id("io.quarkus") version "3.35.2"
+	id("io.quarkus") version "3.37.0"
 	id("net.researchgate.release") version "3.1.0"
 
 	kotlin("jvm") version "2.3.20"
@@ -23,15 +23,14 @@ repositories {
 	mavenCentral()
 }
 
-val konvertVersion = "4.4.0"
 dependencies {
 	constraints {
 		testImplementation("org.assertj:assertj-core:3.27.7")
 		testImplementation("com.tngtech.archunit:archunit-junit5:1.4.1")
 	}
 
-	implementation(enforcedPlatform("io.quarkus:quarkus-bom:3.35.2"))
-	kapt(enforcedPlatform("io.quarkus:quarkus-bom:3.35.2"))
+	implementation(enforcedPlatform("io.quarkus:quarkus-bom:3.37.0"))
+	kapt(enforcedPlatform("io.quarkus:quarkus-bom:3.37.0"))
 }
 
 dependencies {
@@ -92,9 +91,9 @@ dependencies {
 	val langchain4JVersion = "1.11.0"
 
 	//llm
-	implementation("dev.langchain4j:langchain4j:${langchain4JVersion}")
-	implementation("dev.langchain4j:langchain4j-ollama:${langchain4JVersion}")
-	implementation("dev.langchain4j:langchain4j-open-ai:${langchain4JVersion}")
+	//implementation("dev.langchain4j:langchain4j:${langchain4JVersion}")
+	//implementation("dev.langchain4j:langchain4j-ollama:${langchain4JVersion}")
+	//implementation("dev.langchain4j:langchain4j-open-ai:${langchain4JVersion}")
 
 	//mcp
 	implementation("io.quarkiverse.mcp:quarkus-mcp-server-http:1.12.0") //https://docs.quarkiverse.io/quarkus-mcp-server/dev/guides-implementing-tools.html
