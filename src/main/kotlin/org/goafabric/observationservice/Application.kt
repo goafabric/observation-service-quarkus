@@ -2,8 +2,11 @@ package org.goafabric.observationservice
 
 import io.quarkus.runtime.Quarkus
 import io.quarkus.runtime.annotations.QuarkusMain
+import io.quarkus.runtime.annotations.RegisterForReflection
 
 @QuarkusMain
+@RegisterForReflection(targets = [java.lang.Number::class])
+
 class Application
 /*
 class Application : QuarkusApplication {
