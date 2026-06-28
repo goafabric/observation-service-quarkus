@@ -1,0 +1,8 @@
+{
+  "types": [
+    {"name": "java.lang.Number"},
+    {"name": "java.lang.Integer"},
+    {"name": "java.lang.Double"}
+  ],
+  "lambdaCapturingTypes": []
+}
